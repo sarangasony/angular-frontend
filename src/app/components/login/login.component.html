@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="login-form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email or Username</mat-label>
+          <input matInput placeholder="Enter your email or username" ame="username" required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="false">Please enter a valid username</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Enter your password"  name="password" type="password" required>
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error *ngIf="false">Password is required</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="full-width">Login</button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="flex-end">
+      <button mat-button color="accent">Forgot Password?</button>
+      <button mat-button color="accent" routerLink="/register">Register</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

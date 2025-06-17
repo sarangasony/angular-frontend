@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
@@ -16,8 +18,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule,
+    MatIconModule
   ],
-  template: `
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+ /* template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <mat-form-field>
         <input matInput formControlName="email" placeholder="Email" />
@@ -27,7 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
       </mat-form-field>
       <button mat-raised-button type="submit">Login</button>
     </form>
-  `,
+  `,*/
 })
 export class LoginComponent {
   form;
