@@ -85,7 +85,9 @@ export class RegisterComponent {
         this.snackBar.open('Registration successful! Please login.', 'Close', {
           duration: 3000,
         });
-        this.router.navigate(['/login']); // Redirect to login page
+        setTimeout(() => {
+          this.router.navigate(['/login']); // Redirect to login page
+        }, 100);
       },
       error: (errorRes) => {
         this.isLoading = false; // Stop loading
