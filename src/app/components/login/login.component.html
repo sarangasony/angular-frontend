@@ -4,39 +4,81 @@
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-progress-bar *ngIf="isLoading" mode="indeterminate" class="loading-bar"></mat-progress-bar>
+      <mat-progress-bar
+        *ngIf="isLoading"
+        mode="indeterminate"
+        class="loading-bar"
+      ></mat-progress-bar>
 
       <div *ngIf="loginError" class="error-message mat-error">
         {{ loginError }}
       </div>
 
       <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
-
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="Enter your email" formControlName="email" required>
+          <input
+            matInput
+            placeholder="Enter your email"
+            formControlName="email"
+            required
+          />
           <mat-icon matSuffix>email</mat-icon>
-          <mat-error *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')">
+          <mat-error
+            *ngIf="
+              form.controls['email'].touched &&
+              form.controls['email'].hasError('required')
+            "
+          >
             Email is required
           </mat-error>
-          <mat-error *ngIf="form.controls['email'].touched && form.controls['email'].hasError('email')">
+          <mat-error
+            *ngIf="
+              form.controls['email'].touched &&
+              form.controls['email'].hasError('email')
+            "
+          >
             Please enter a valid email
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Enter your password" formControlName="password" type="password" required>
+          <input
+            matInput
+            placeholder="Enter your password"
+            formControlName="password"
+            type="password"
+            required
+          />
           <mat-icon matSuffix>lock</mat-icon>
-          <mat-error *ngIf="form.controls['password'].touched && form.controls['password'].hasError('required')">
+          <mat-error
+            *ngIf="
+              form.controls['password'].touched &&
+              form.controls['password'].hasError('required')
+            "
+          >
             Password is required
           </mat-error>
-          <mat-error *ngIf="form.controls['password'].touched && form.controls['password'].hasError('minlength')">
+          <mat-error
+            *ngIf="
+              form.controls['password'].touched &&
+              form.controls['password'].hasError('minlength')
+            "
+          >
             Password must be at least 6 characters
           </mat-error>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="form.invalid || isLoading">Login</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="full-width"
+          [disabled]="form.invalid || isLoading"
+        >
+          Login
+        </button>
       </form>
     </mat-card-content>
     <mat-card-actions class="flex-end">
