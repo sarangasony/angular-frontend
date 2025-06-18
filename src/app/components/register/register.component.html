@@ -5,6 +5,9 @@
     </mat-card-header>
 
     <mat-card-content>
+
+       <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
       <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Name</mat-label>
@@ -66,6 +69,10 @@
             >Password must be at least 6 characters</mat-error
           >
         </mat-form-field>
+
+        <div *ngIf="registerError" class="error-message mat-error">
+          {{ registerError }}
+        </div>
 
         <button
           mat-raised-button
