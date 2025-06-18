@@ -1,0 +1,55 @@
+.task-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.task-card {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  mat-form-field {
+    flex-grow: 1;
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+}
+
+.table-container {
+  position: relative; // Needed for spinner overlay
+  min-height: 200px; // Ensure space for spinner
+  overflow: auto; // For horizontal scrolling on small screens
+}
+
+.loading-spinner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 120px; // Adjust as needed
+  text-align: right; // Align buttons to the right
+}
+
+.mat-column-status {
+  width: 100px;
+  text-align: center;
+}

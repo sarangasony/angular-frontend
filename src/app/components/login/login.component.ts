@@ -59,9 +59,9 @@ export class LoginComponent {
       next: (response: { token: string }) => { 
         this.isLoading = false;
         if (response && response.token) {
-          localStorage.setItem('authToken', response.token);
+          localStorage.setItem('token', response.token);
           console.log('Login successful! Token saved.');
-          this.router.navigate(['/task']); 
+          this.router.navigate(['/dashboard']); // Navigate to the dashboard or home page
         } else {
           this.loginError = 'Login failed: No token received.';
         }

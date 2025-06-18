@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Task' : 'Add New Task' }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="taskForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>User ID</mat-label>
+      <input matInput formControlName="user_id" required>
+      <mat-error *ngIf="taskForm.get('user_id')?.hasError('required') && taskForm.get('user_id')?.touched">
+        User ID is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" required>
+      <mat-error *ngIf="taskForm.get('title')?.hasError('required') && taskForm.get('title')?.touched">
+        Title is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="3"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" required>
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{ status | titlecase }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="taskForm.get('status')?.hasError('required') && taskForm.get('status')?.touched">
+        Status is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Due Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="due_date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="taskForm.get('due_date')?.hasError('required') && taskForm.get('due_date')?.touched">
+        Due Date is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="taskForm.invalid">{{ isEditMode ? 'Save Changes' : 'Add Task' }}</button>
+</div>
