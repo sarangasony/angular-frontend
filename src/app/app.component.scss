@@ -1,0 +1,56 @@
+.app-toolbar {
+  height: 64px; /* Standard toolbar height */
+  display: flex;
+  align-items: center;
+  padding: 0 16px; /* Standard padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #3f51b5; /* Primary color */
+  color: white;
+
+  span {
+    font-weight: 500;
+  }
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto; /* Pushes content to the right */
+}
+
+.app-content {
+  padding: 20px; /* Padding around the routed content */
+  box-sizing: border-box;
+  width: 100%;
+  margin: 20px auto; /* Center the main content */
+}
+
+.logout-button.mat-mdc-button:not(:disabled){
+  color: white; 
+}
+
+/* Ensure body takes full height and allows flexbox for sticky footer if needed */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make router-outlet content fill available space */
+router-outlet + * {
+  flex-grow: 1;
+}
+
+// Basic responsiveness for toolbar buttons
+@media (max-width: 600px) {
+  .app-toolbar {
+    .mat-button {
+      padding: 0 8px; /* Reduce padding on small screens */
+    }
+    .mat-icon {
+      margin-right: 4px; /* Adjust icon margin */
+    }
+  }
+}
