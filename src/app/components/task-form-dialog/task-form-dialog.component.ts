@@ -51,11 +51,19 @@ export class TaskFormDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  private formatDate(date: unknown): string {
+    if (!(date instanceof Date)) return '';
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+    const day = `${date.getDate()}`.padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   onSave(): void {
     if (this.taskForm.valid) {
       const formValue = this.taskForm.value;
       // Convert Date object from mat-datepicker to 'YYYY-MM-DD' string for backend
-      formValue.due_date = formValue.due_date ? formValue.due_date.toISOString().split('T')[0] : '';
+      formValue.due_date = this.formatDate(formValue.due_date);
 
       this.dialogRef.close(formValue);
     } else {

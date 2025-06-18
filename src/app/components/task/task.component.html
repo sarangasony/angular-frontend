@@ -28,12 +28,6 @@
             <td mat-cell *matCellDef="let task"> {{task.id}} </td>
           </ng-container>
 
-          <!-- User ID Column -->
-          <ng-container matColumnDef="user_id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> User ID </th>
-            <td mat-cell *matCellDef="let task"> {{task.user_id}} </td>
-          </ng-container>
-
           <!-- Title Column -->
           <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
@@ -56,12 +50,6 @@
           <ng-container matColumnDef="created_at">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Created At </th>
             <td mat-cell *matCellDef="let task"> {{task.created_at | date:'medium'}} </td>
-          </ng-container>
-
-          <!-- Updated At Column -->
-          <ng-container matColumnDef="updated_at">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated At </th>
-            <td mat-cell *matCellDef="let task"> {{task.updated_at | date:'medium'}} </td>
           </ng-container>
 
           <!-- Actions Column -->

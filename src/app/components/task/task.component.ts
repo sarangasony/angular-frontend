@@ -40,7 +40,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class TaskComponent implements OnInit {
   // Updated displayedColumns to reflect new backend fields
-  displayedColumns: string[] = ['id', 'user_id', 'title', 'status', 'due_date', 'created_at', 'updated_at', 'actions'];
+  displayedColumns: string[] = ['id','title', 'status', 'due_date', 'created_at', 'actions'];
   dataSource = new MatTableDataSource<Task>();
   isLoading = true;
 
