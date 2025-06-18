@@ -40,13 +40,12 @@ export class TaskFormDialogComponent implements OnInit {
 
     this.taskForm = this.fb.group({
       id: [data.task?.id || null],
-      user_id: [data.task?.user_id || '', Validators.required],
       title: [data.task?.title || '', Validators.required],
       description: [data.task?.description || ''],
       status: [data.task?.status || this.statuses[0], Validators.required],
-      // Convert 'YYYY-MM-DD' string to Date object for mat-datepicker
       due_date: [data.task?.due_date ? new Date(data.task.due_date) : null, Validators.required],
     });
+
   }
 
   ngOnInit(): void {}
