@@ -20,8 +20,8 @@
         <mat-form-field appearance="outline" class="full-width">
         <mat-label>Status</mat-label>
         <mat-select formControlName="status" required>
-            <mat-option *ngFor="let status of statuses" [value]="status">
-            {{ status | titlecase }}
+            <mat-option *ngFor="let statusValue of statuses" [value]="statusValue">
+            {{ statusValue | titlecase }}
             </mat-option>
         </mat-select>
         <mat-error *ngIf="taskForm.get('status')?.hasError('required') && taskForm.get('status')?.touched">

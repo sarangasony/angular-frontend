@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { Task } from '../../models/task.model';
+import { Task, TaskStatus } from '../../models/task.model'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select'; 
@@ -29,7 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
 export class TaskFormDialogComponent implements OnInit {
   taskForm: FormGroup;
   isEditMode: boolean;
-  statuses: string[] = ['pending', 'in-progress', 'completed']; // Predefined statuses
+  statuses: TaskStatus[] = Object.values(TaskStatus);
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +42,7 @@ export class TaskFormDialogComponent implements OnInit {
       id: [data.task?.id || null],
       title: [data.task?.title || '', Validators.required],
       description: [data.task?.description || ''],
-      status: [data.task?.status || this.statuses[0], Validators.required],
+      status: [data.task?.status || TaskStatus.Pending, Validators.required],
       due_date: [data.task?.due_date ? new Date(data.task.due_date) : null, Validators.required],
     });
 
