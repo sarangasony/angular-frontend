@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service'; // Ensure this path is correct
 
 // Angular Material Imports
@@ -16,6 +16,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'; // Option
   standalone: true,
   selector: 'app-login',
   imports: [
+    RouterModule,
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
