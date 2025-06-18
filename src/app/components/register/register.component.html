@@ -1,1 +1,88 @@
-<p>register works!</p>
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>Create Account</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Enter your full name"
+            formControlName="name"
+            required
+          />
+          <mat-error *ngIf="name?.touched && name?.hasError('required')"
+            >Name is required</mat-error
+          >
+          <mat-error *ngIf="name?.touched && name?.hasError('minlength')"
+            >Name must be at least 3 characters</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Enter your email"
+            formControlName="email"
+            required
+          />
+          <mat-error *ngIf="email?.touched && email?.hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="email?.touched && email?.hasError('email')"
+            >Please enter a valid email</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            placeholder="Enter your password"
+            formControlName="password"
+            required
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="'Toggle password visibility'"
+            type="button"
+          >
+            <mat-icon>{{
+              hidePassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password?.touched && password?.hasError('required')"
+            >Password is required</mat-error
+          >
+          <mat-error
+            *ngIf="password?.touched && password?.hasError('minlength')"
+            >Password must be at least 6 characters</mat-error
+          >
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="full-width"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          Register
+        </button>
+      </form>
+
+      <mat-card-actions class="flex-center">
+        <button mat-button color="accent" routerLink="/login">
+          Back to Login
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>
