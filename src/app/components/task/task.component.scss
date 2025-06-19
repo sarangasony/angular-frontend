@@ -1,55 +1,103 @@
-.task-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
 .task-card {
-  width: 100%;
+  margin: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap; // Allows items to wrap on smaller screens
+  gap: 15px; // Space between items
+}
 
-  mat-form-field {
-    width: 500px;
-    margin-right: 20px;
-    margin-top: 20px;
+.search-field {
+  flex-grow: 1; // Allows search field to take available space
+  max-width: 300px; // Limit max width
+  min-width: 200px; // Ensure it doesn't get too small
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px; // Space between filter buttons
+}
+
+.filter-buttons button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+
+  &.active-filter {
+    // Styles for the active filter button
+    background-color: var(--mat-primary-color, #007bff); // Use Angular Material primary color
+    color: white;
+    border-color: var(--mat-primary-color, #007bff);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+  }
+
+  // Override specific color for active state if needed, e.g., for 'warn'
+  &.active-filter.mat-warn {
+    background-color: var(--mat-warn-color, #f44336);
+    border-color: var(--mat-warn-color, #f44336);
+  }
+
+  &.active-filter.mat-primary {
+    background-color: var(--mat-primary-color, #007bff);
+    border-color: var(--mat-primary-color, #007bff);
   }
 }
 
+
 .table-container {
-  position: relative; // Needed for spinner overlay
-  min-height: 200px; // Ensure space for spinner
-  overflow: auto; // For horizontal scrolling on small screens
+  overflow-x: auto; // Ensures table is scrollable on small screens
 }
 
-.loading-spinner-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-table {
+mat-table {
   width: 100%;
 }
 
-.mat-column-actions {
-  width: 120px; // Adjust as needed
-  text-align: right; // Align buttons to the right
+.mat-header-cell {
+  font-weight: bold;
+  color: #333;
 }
 
-.mat-column-status {
-  width: 100px;
-  text-align: center;
+.mat-row:hover {
+  background-color: #f5f5f5;
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; // Give some height for the spinner
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+// Status specific styling
+.status-completed {
+  color: #4CAF50; /* Green */
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #FFC107; /* Amber/Yellow */
+  font-weight: bold;
+}
+
+mat-card-content {
+  margin-top: 20px;
+}
+

@@ -19,11 +19,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
       })
     : req;
 
-  console.log('TokenInterceptor: Request URL:', authReq.url);
-  if (token) {
-    console.log('TokenInterceptor: Authorization header added:', authReq.headers.get('Authorization'));
-  }
-
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
