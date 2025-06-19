@@ -74,6 +74,7 @@ export class TaskComponent implements OnInit {
       // Convert filter to lowercase for case-insensitive comparison
       const searchTerms = filter.toLowerCase().split(' ');
 
+     
       // Check if the current status filter applies
       if (
         this.currentStatusFilter &&
@@ -87,8 +88,7 @@ export class TaskComponent implements OnInit {
         return true;
       }
 
-      // Check if any of the search terms are present in the task's title or description
-      const dataStr = (data.title + ' ' + data.description).toLowerCase();
+      const dataStr = (data.title + ' ' + data.description + ' ' + data.status).trim().replace(/\s+/g, ' ').toLowerCase();
       return searchTerms.every((term) => dataStr.includes(term));
     };
   }
