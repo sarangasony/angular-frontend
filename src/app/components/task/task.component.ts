@@ -18,13 +18,13 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select'; // <-- Add MatSelectModule
-import { ReactiveFormsModule } from '@angular/forms'; // <-- Add ReactiveFormsModule
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 import { Task, TaskStatus } from '../../models/task.model';
-import { PaginatedResponse, TaskService, TaskFilters } from '../../services/task.service'; // Assuming TaskService will return PaginatedResponse
+import { PaginatedResponse, TaskService, TaskFilters } from '../../services/task.service';
 import { TaskFormDialogComponent } from '../task-form-dialog/task-form-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
@@ -44,8 +44,8 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule, // Make sure this is added here
-    ReactiveFormsModule, // Make sure this is added here
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
@@ -63,9 +63,6 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   isLoading = true;
-  // Use Object.values(TaskStatus) if you want to display 'pending', 'in-progress', etc.
-  // Otherwise, if TaskStatus is directly 'pending', 'in-progress', etc., keep it as is.
-  //statuses = Object.values(TaskStatus); 
   statuses = TaskStatus;
   totalItems = 0;
 
@@ -82,12 +79,9 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
 
-  // Use { static: false } for paginator and sort as they are conditional/dynamic
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  // If you are binding search input with `(input)="onSearchChange()"` and using ElementRef, keep this:
-  @ViewChild('searchInput') searchInput!: ElementRef; // Changed 'input' to 'searchInput' for clarity with the template
-
+  @ViewChild('searchInput') searchInput!: ElementRef; 
 
   constructor(
     private taskService: TaskService,
@@ -109,17 +103,11 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Initial load of tasks
-    // IMPORTANT: loadTasks() should only set dataSource.data and totalItems.
-    // Paginator properties (length, pageIndex, pageSize) must be set ONLY AFTER paginator is available.
     this.loadTasks();
   }
 
   ngAfterViewInit(): void {
-    // Use a setTimeout to ensure ViewChild elements are available
-    // and also to avoid 'ExpressionChangedAfterItHasBeenCheckedError'
       if (this.paginator) {
-        // Set initial paginator properties here when it's guaranteed to be available
         this.paginator.pageIndex = this.currentFilters.page!;
         this.paginator.pageSize = this.currentFilters.pageSize!;
         this.paginator.length = this.totalItems; // Initial total items for paginator
@@ -145,18 +133,10 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
           this.loadTasks();
         });
 
-        // Set the initial sort properties if needed (optional)
-        // this.sort.active = this.currentFilters.sortBy!;
-        // this.sort.direction = this.currentFilters.sortDirection! as 'asc' | 'desc';
-        // this.sort.sortChange.emit({active: this.sort.active, direction: this.sort.direction});
       } else {
         console.warn('MatSort not found in ngAfterViewInit. Sorting will not work.');
       }
 
-      // If you're using `searchInput` with a debounced `onSearchChange`,
-      // you don't need a valueChanges subscription for it in ngOnInit.
-      // The `onSearchChange` method (triggered by HTML input event)
-      // pushes to `searchSubject` which is already subscribed in constructor.
   }
 
   ngOnDestroy(): void {
@@ -167,31 +147,18 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
    onSearchChange(event: Event): void { // Ensure it accepts 'event: Event'
     const inputElement = event.target as HTMLInputElement; // Get element from event
     const searchValue = inputElement.value?.trim() || '';
-
-    // DEBUG 1: Check if onSearchChange is called and what the raw value is
-    console.log('DEBUG 1: onSearchChange triggered. Raw Value:', searchValue);
-
     this.searchSubject.next(searchValue);
 
-    // DEBUG 2: Check if the searchSubject received the value immediately
-    console.log('DEBUG 2: searchSubject.next called with:', searchValue);
   }
   loadTasks(): void {
     this.isLoading = true;
     this.taskService.getTasks(this.currentFilters).subscribe({
-      next: (response: PaginatedResponse<Task>) => { // Expecting PaginatedResponse
+      next: (response: PaginatedResponse<Task>) => { 
         this.dataSource.data = response.data;
         this.totalItems = response.total;
 
-        // ONLY update paginator properties IF it's available (i.e., after ngAfterViewInit)
         if (this.paginator) {
           this.paginator.length = this.totalItems;
-          // IMPORTANT: Do NOT set pageIndex and pageSize here if they are already being set by the paginator.page subscription.
-          // This can lead to infinite loops or incorrect behavior.
-          // The currentFilters object is the source of truth, and paginator.page subscription
-          // updates currentFilters. When loadTasks() is called from user actions (filter/sort/page),
-          // currentFilters is already updated. When loadTasks() is called on init/CRUD success,
-          // it uses the currentFilters state.
         }
 
         this.isLoading = false;
@@ -205,13 +172,6 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     });
   }
-
-  // Method to handle search input changes via template
-  /*onSearchChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const searchValue = inputElement.value?.trim() || '';
-    this.searchSubject.next(searchValue);
-  }*/
 
   // Method to handle status filter changes
   setStatusFilter(status: 'all' | TaskStatus): void {

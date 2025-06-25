@@ -32,15 +32,13 @@
   transition: all 0.2s ease-in-out;
 
   &.active-filter {
-    // Styles for the active filter button
-    background-color: var(--mat-primary-color, #007bff); // Use Angular Material primary color
+    background-color: var(--mat-primary-color, #007bff);
     color: white;
     border-color: var(--mat-primary-color, #007bff);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transform: translateY(-1px);
   }
 
-  // Override specific color for active state if needed, e.g., for 'warn'
   &.active-filter.mat-warn {
     background-color: var(--mat-warn-color, #f44336);
     border-color: var(--mat-warn-color, #f44336);
@@ -54,7 +52,7 @@
 
 
 .table-container {
-  overflow-x: auto; // Ensures table is scrollable on small screens
+  overflow-x: auto; 
 }
 
 mat-table {
