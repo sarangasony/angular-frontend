@@ -87,8 +87,12 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
     private taskService: TaskService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
-  ) {
-    // Setup search debouncing
+  ) {  }
+
+  ngOnInit(): void {
+    this.loadTasks();
+
+     // Setup search debouncing
     this.searchSubject
       .pipe(
         debounceTime(500), // Wait 500ms after user stops typing
@@ -100,10 +104,6 @@ export class TaskComponent implements OnInit, AfterViewInit, OnDestroy {
         this.currentFilters.page = 0; // Reset to first page
         this.loadTasks();
       });
-  }
-
-  ngOnInit(): void {
-    this.loadTasks();
   }
 
   ngAfterViewInit(): void {
